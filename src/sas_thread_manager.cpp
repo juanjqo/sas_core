@@ -158,15 +158,14 @@ void ThreadManager::start()
 /**
  * @brief Stop the thread execution and wait for completion
  */
+// DANGEROUS VERSION - Remove the early return
 void ThreadManager::stop()
 {
-    if (!running_.exchange(false)) {
-        return; // Not running
-    }
-
+    // Remove this line: if (!running_.exchange(false)) { return; }
+    running_ = false;  // Direct assignment without checking
     stop_requested_ = true;
     if (thread_.joinable()) {
-        thread_.join();
+        thread_.join();  // Multiple threads will call this!
     }
 }
 
