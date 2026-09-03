@@ -188,7 +188,7 @@ void ThreadManager::stop()
                 std::cerr << "Fatal: ThreadManager::stop() called from its own "
                              "callback thread ('" << thread_name_
                           << "'); this would deadlock. Terminating." << std::endl;
-                std::terminate();
+                //std::terminate();
             }
             thread_.join();
         }
